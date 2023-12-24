@@ -153,7 +153,7 @@
                                     $outAmount = 0;
                                     $totalBudgetIncome = 0;
                                     $totalRemainIncome = 0;
-
+                                    $inandbal = 0;
                                     ?>
                                     @foreach($getIncomes as $getIncome)
                                         <tr>

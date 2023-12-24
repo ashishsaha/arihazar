@@ -220,7 +220,7 @@
     <tr>
         <td></td>
         <td></td>
-        <td style="padding-left: 2.1in !important;padding-top:0.10in !important;">খারদিয়া, শরীফাবাদ - ৭৮৩০, ভাংগা, ফরিদপুর</td>
+        <td style="padding-left: 2.1in !important;padding-top:0.10in !important;">খারদিয়া, শরীফাবাদ - ৭৮৩০, ভাংগা, আড়াইহাজার</td>
     </tr>
     <tr>
         <td></td>

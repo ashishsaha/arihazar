@@ -167,11 +167,10 @@
                                 </div>
                                 <br style="clear: both">
                                 <div class="heading text-center">
-                                    <h1>ফরিদপুর পৌরসভা, ফরিদপুর</h1>
+                                    <h1>আড়াইহাজার পৌরসভা,নারায়নগঞ্জ</h1>
                                     <img src="{{asset('/')}}public/logo.png" style="display:block;width: 120px;margin: 50px auto">
                                     <div class="certificate-title" style="border:solid 3px black;text-align: center;">
                                         অবিবাহিত সনদ পত্র
-
                                     </div>
                                 </div>
 
@@ -201,7 +200,7 @@
                                     @if(!empty($certificate->upazila))
                                         উপজেলা:{{$certificate->upazila}},
                                     @endif
-                                    জেলা:ফরিদপুর।
+                                    জেলা:নারায়নগঞ্জ।
 
 
                                     {{$certificate->certificate_details}}।
@@ -221,7 +220,7 @@
                                         <!--<img src="{{asset('/')}}public/mayor.png" width="150"><br>-->
                                         <!--<strong> অমিতাভ বোস </strong><br>-->
                                         <strong>মেয়র </strong><br>
-                                        <strong>ফরিদপুর পৌরসভা , ফরিদপুর</strong>
+                                        <strong>আড়াইহাজার পৌরসভা , নারায়নগঞ্জ</strong>
                                     </div>
                                 </div>
 

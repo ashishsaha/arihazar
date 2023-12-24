@@ -129,10 +129,10 @@ class Upangsho extends Model
 
                                 <tr>
 
-                                    <td width="25%" style="text-align:center">  হিসাব রক্ষক <br/> ফরিদপুর পৌরসভা </td>
-                                    <td width="25%"  style="text-align:center">  হিসাব রক্ষণ কর্মকর্তা  <br/> ফরিদপুর পৌরসভা </td>
-                                    <td width="25%"  style="text-align:center"> প্রধান নির্বাহী কর্মকর্তা / সচিব  <br/> ফরিদপুর পৌরসভা </td>
-                                    <td width="25%"  style="text-align:center"> মেয়র <br/>  ফরিদপুর পৌরসভা </td>
+                                    <td width="25%" style="text-align:center">  হিসাব রক্ষক <br/> আড়াইহাজার পৌরসভা </td>
+                                    <td width="25%"  style="text-align:center">  হিসাব রক্ষণ কর্মকর্তা  <br/> আড়াইহাজার পৌরসভা </td>
+                                    <td width="25%"  style="text-align:center"> প্রধান নির্বাহী কর্মকর্তা / পৌর নির্বাহী কর্মকর্তা  <br/> আড়াইহাজার পৌরসভা </td>
+                                    <td width="25%"  style="text-align:center"> মেয়র <br/>  আড়াইহাজার পৌরসভা </td>
                                 </tr>
                             </table>
 
@@ -1209,11 +1209,11 @@ class Upangsho extends Model
     public static function getBalancesheetYearly($upang, $sd, $ed){
 
         $balance = self::balancegenarate($upang, $sd);
-       
+
         //echo  $upangsho.' '.$khat.' '.$sd.' '.$ed; exit;
 
         if($upang!=''){
-           
+
             $getIncoms =
                 Incoexpense::join('khats', 'khats.khat_id', '=', 'incoexpenses.khat_id')
                     ->where('incoexpenses.upangsho_id', $upang)
@@ -1272,7 +1272,7 @@ class Upangsho extends Model
         }
         $data = '<table class="table table-bordered" style="width:50%; margin:0px; float:left; border:1px solid #000" id="my Table">
 	        <thead>
-    	        
+
     	        <tr>
     	            <th colspan="5">প্রাপ্তি</th>
                 </tr>
@@ -1313,7 +1313,7 @@ class Upangsho extends Model
         	            <td align="right"><strong>'. str_replace(self::$en, self::$bn, number_format($inamnt,2)) .'</strong></td>
         	            <td align="right"><strong>'. str_replace(self::$en, self::$bn, number_format($totalRemainIncome,2)) .'</strong></td>
         	        </tr>
-        	        
+
         	        <tr>
         	            <td style="height:80px;"></td>
         	            <td style="height:80px;" align="right"><strong>প্রারম্ভিক জের</strong></td>
@@ -1374,7 +1374,7 @@ class Upangsho extends Model
     	            <td align="right"><strong>'. str_replace(self::$en, self::$bn, number_format($examnt,2)) .'</strong></td>
     	            <td align="right"><strong>'. str_replace(self::$en, self::$bn, number_format($totalRemainExpense,2)) .'</strong></td>
     	        </tr>
-    	        
+
     	        <tr>
     	            <td></td>
     	            <td align="right"><strong>সমাপ্তি জের</strong></td>
@@ -1396,7 +1396,7 @@ class Upangsho extends Model
                             <table width="100%">
 
                                 <tr>
-                         
+
                                     <td width="25%" style="text-align:center">  হিসাব রক্ষক <br/> ফরিদপুর পৌরসভা </td>
                                     <td width="25%"  style="text-align:center">  হিসাব রক্ষণ কর্মকর্তা  <br/> ফরিদপুর পৌরসভা </td>
                                     <td width="25%"  style="text-align:center"> প্রধান নির্বাহী কর্মকর্তা / সচিব  <br/> ফরিদপুর পৌরসভা </td>

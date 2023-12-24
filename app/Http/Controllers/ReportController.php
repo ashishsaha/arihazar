@@ -310,8 +310,7 @@ class ReportController extends Controller
 
     }
 
-    public function chequeRegister(Request $request)
-    {
+    public function chequeRegister(Request $request){
         $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
         $expenses = [];
         if ($request->start_date != '' && $request->end_date != '') {
@@ -324,7 +323,7 @@ class ReportController extends Controller
                 ->whereBetween('receive_datwe', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
                 ->get();
         }
-
+        
         return view('accounts.report.cheque_register', compact('sections', 'expenses'));
     }
 

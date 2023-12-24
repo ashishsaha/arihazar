@@ -26,7 +26,7 @@
                                 <div class="col-md-12 text-center">
                                     <br><br>
 
-                                    <h2><img src="{{url('/')}}/public/logo.png" width="50"> ফরিদপুর পৌরসভা</h2>
+                                    <h2><img src="{{url('/')}}/public/logo.png" width="50"> আড়াইহাজার পৌরসভা</h2>
                                     <span style="font-size:20px;">পায়ে চালিত রিক্সা / ভ্যান চালকের লাইসেন্স <br>অর্থ বছর {{ str_replace($en, $bn, $driverLicense->year )}}</span>
                                 </div>
                                 <div class="col-md-12" style="font-size:18px;line-height: 30px;">
@@ -74,7 +74,7 @@
                                     		<td> {{ $driverLicense->post }}</td>
                                     		<td>জেলা</td>
                                     		<td> : </td>
-                                    		<td>ফরিদপুর।</td>
+                                    		<td>নারায়নগঞ্জ।</td>
                                     	</tr>
                                     </table>
 
@@ -103,11 +103,11 @@
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4 text-center">
                                         <strong>লাইসেন্স পরিদর্শক</strong><br>
-                                        ফরিদপুর পৌরসভা
+                                        আড়াইহাজার পৌরসভা
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4 text-center">
                                         <strong>মেয়র</strong><br>
-                                        ফরিদপুর পৌরসভা
+                                        আড়াইহাজার পৌরসভা
                                     </div>
                                 </div>
 

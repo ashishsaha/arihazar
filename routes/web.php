@@ -210,7 +210,7 @@ Route::middleware('auth')->group(function () {
 
 
         //Cheque Register
-        Route::get('report/cheque-register', [ReportController::class, 'chequeRegister'])->name('report.cheque_register');
+        Route::get('report/cheque-registers', [ReportController::class, 'chequeRegister'])->name('report.cheque_register');
         Route::post('cheque-register-allow-all', [ReportController::class, 'chequeRegisterAllowAll'])->name('cheque_register.allow_all');
         Route::post('cheque-register-allow', [ReportController::class, 'chequeRegisterAllow'])->name('cheque_register.allow');
         Route::post('report/delete/cheque-register-delete', [ReportController::class, 'chequeRegisterDelete'])->name('cheque_register.delete');

@@ -139,7 +139,7 @@
 
                                             <td width="25%" style="text-align:center">  হিসাব রক্ষক <br/> {{ config('app.name') }} </td>
                                             <td width="25%"  style="text-align:center">  হিসাব রক্ষণ কর্মকর্তা  <br/> {{ config('app.name') }} </td>
-                                            <td width="25%"  style="text-align:center"> প্রধান নির্বাহী কর্মকর্তা / সচিব  <br/> {{ config('app.name') }} </td>
+                                            <td width="25%"  style="text-align:center"> প্রধান নির্বাহী কর্মকর্তা / পৌর নির্বাহী কর্মকর্তা  <br/> {{ config('app.name') }} </td>
                                             <td width="25%"  style="text-align:center"> মেয়র <br/>  {{ config('app.name') }} </td>
                                         </tr>
                                     </table>

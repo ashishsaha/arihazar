@@ -154,7 +154,7 @@
         <div class="col-4 pl-0">
             <div class="heading">
                  <h1 class="text-center"><img height="70px" src="{{ asset('img/logo.png') }}" alt=""></h1>
-                <h5 class="text-center"><b>{{ config('app.name') }}, ফরিদপুর।</b></h5>
+                <h5 class="text-center"><b>{{ config('app.name') }}, নারায়নগঞ্জ।</b></h5>
                 <span style="font-size: 13px;display: block"><b>{{ bn_number($collection->id) }} নং ফর্ম</b></span>
                 <span style="font-size: 13px;display: block"><b> [৯৮ ও ১১১ বিধানগুলি দেখুন]</b></span>
                 <h2 class="text-center" style="margin-top: 5px;"><b>বিবিধ রশিদ</b></h2>
@@ -205,7 +205,7 @@
         <div class="col-4 pl-0">
             <div class="heading">
                  <h1 class="text-center"><img height="70px" src="{{ asset('img/logo.png') }}" alt=""></h1>
-                <h5 class="text-center"><b>{{ config('app.name') }}, ফরিদপুর।</b></h5>
+                <h5 class="text-center"><b>{{ config('app.name') }}, নারায়নগঞ্জ।</b></h5>
                 <span style="font-size: 13px;display: block"><b>{{ bn_number($collection->id) }} নং ফর্ম</b></span>
                 <span style="font-size: 13px;display: block"><b> [৯৮ ও ১১১ বিধানগুলি দেখুন]</b></span>
                 <h2 class="text-center" style="margin-top: 5px;"><b>বিবিধ রশিদ</b></h2>

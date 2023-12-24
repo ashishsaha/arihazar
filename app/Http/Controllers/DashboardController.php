@@ -3,6 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Enumeration\Role;
+use App\Models\Certificate\Certificate;
+use App\Models\Certificate\CharacterCertificate;
+use App\Models\Certificate\FamilyCertificate;
+use App\Models\Certificate\FamilyCertificateEnglish;
+use App\Models\Certificate\IncomeCertificate;
+use App\Models\Certificate\LandlessCertificate;
+use App\Models\Certificate\NationalityCertificate;
+use App\Models\Certificate\NationalityCertificateEng;
+use App\Models\Certificate\OyarishCertificate;
+use App\Models\Certificate\RemarriageCertificateBn;
+use App\Models\Certificate\unmarriageCertificateBn;
 use App\Models\Collection\Collection;
 use App\Models\SisterConcern;
 use App\Models\Sweeper\Area;
@@ -55,6 +66,38 @@ class DashboardController extends Controller
         }elseif (auth()->user()->role == Role::$ACCOUNTS){
             $upangshos = upangsho::where('upangsho_id', '!=', 0)->get();
             $data['upangshos'] = $upangshos;
+        }elseif (auth()->user()->role == Role::$CERTIFICATE){
+            $certificate_total= Certificate::all()->count();
+            $landless_certificate_total= LandlessCertificate::all()->count();
+            $chr_certificate_total= CharacterCertificate::all()->count();
+            $fmly_certificate_bn_total= FamilyCertificate::all()->count();
+            $fmly_certificate_en_total= FamilyCertificateEnglish::all()->count();
+            $nationality_certificate_total= NationalityCertificate::all()->count();
+            $nationality_certificate_eng_total= NationalityCertificateEng::all()->count();
+
+            $unmarriage_certificateBn_total= unmarriageCertificateBn::where('status',1)->count();
+            $unmarriage_certificateEn_total= unmarriageCertificateBn::where('status',2)->count();
+            $remarriageCertificateBn_total= RemarriageCertificateBn::where('status',1)->count();
+            $remarriageCertificateEn_total= RemarriageCertificateBn::where('status',2)->count();
+            $incomeCertificateEn_total= IncomeCertificate::count();
+            $oyarishCertificate_total= OyarishCertificate::count();
+
+            $data = [
+                'active'=>0,
+                'certificate_total'=>$certificate_total,
+                'landless_certificate_total'=>$landless_certificate_total,
+                'chr_certificate_total'=>$chr_certificate_total,
+                'fmly_certificate_bn_total'=>$fmly_certificate_bn_total,
+                'fmly_certificate_en_total'=>$fmly_certificate_en_total,
+                'nationality_certificate_total'=>$nationality_certificate_total,
+                'nationality_certificate_eng_total'=>$nationality_certificate_eng_total,
+                'unmarriage_certificateBn_total'=>$unmarriage_certificateBn_total,
+                'unmarriage_certificateEn_total'=>$unmarriage_certificateEn_total,
+                'remarriageCertificateBn_total'=>$remarriageCertificateBn_total,
+                'remarriageCertificateEn_total'=>$remarriageCertificateEn_total,
+                'incomeCertificateEn_total'=>$incomeCertificateEn_total,
+                'oyarishCertificate_total'=>$oyarishCertificate_total,
+            ];
         }
 
         return view('dashboard', $data);

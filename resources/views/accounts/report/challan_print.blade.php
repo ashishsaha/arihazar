@@ -8,14 +8,20 @@
             height: calc(1.25rem + 2px);
         }
 
-        .table-bordered thead td, .table-bordered thead th, .table-bordered body td {
+        .table-bordered thead td,
+        .table-bordered thead th,
+        .table-bordered body td {
             border: 1px solid #000 !important;
             vertical-align: middle;
         }
-        .table-bordered td, .table-bordered th {
+
+        .table-bordered td,
+        .table-bordered th {
             border: 1px solid #000000 !important;
         }
-        .chalan.table-bordered td, .chalan.table-bordered th {
+
+        .chalan.table-bordered td,
+        .chalan.table-bordered th {
             border: 1px solid #000 !important;
             vertical-align: middle;
         }
@@ -65,30 +71,39 @@
         .code-area {
             width: 100% !important;
         }
+
         ul.code-list li {
             text-align: center;
         }
-        .payment-list-table td{
+
+        .payment-list-table td {
             padding: 3px 4px !important;
         }
-        .first-code-list{
+
+        .first-code-list {
             padding-left: 1px !important;
         }
+
         @media print {
-            .first-code-list{
+            .first-code-list {
                 padding-left: 4px !important;
             }
+
             ul.code-list li {
                 min-width: 62px !important;
             }
+
             @page {
                 size: legal !important;
                 margin: 0 10px 0 40px !important;
             }
         }
-        .table-bordered td, .table-bordered th {
+
+        .table-bordered td,
+        .table-bordered th {
             font-size: 16px !important;
         }
+
         ul.code-list li {
             margin: 0 -2px;
         }
@@ -103,33 +118,42 @@
                             class="fa fa-print"></i></a>
                 </div>
                 <div class="card-body form-print-area" id="printArea">
-                    @if($vat)
+                    @if ($vat)
                         <div id="vat-area" style="margin-top: 60px">
                             <div class="row">
                                 <div class="col-12 form-top">
-                                    <h2  class="text-center">চালান ফরম</h2>
-                                    <p class="text-center" style="font-size: 18px;margin-bottom: 0;">টি,আর ফরম নং ৬ (এস, আর ৩৭ দ্রষ্টব্যঃ)</p>
+                                    <h2 class="text-center">চালান ফরম</h2>
+                                    <p class="text-center" style="font-size: 18px;margin-bottom: 0;">টি,আর ফরম নং ৬ (এস, আর
+                                        ৩৭ দ্রষ্টব্যঃ)</p>
 
                                 </div>
                                 <div class="col-5 offset-7">
                                     <table class="table table-bordered form-top-table">
                                         <tr>
-                                            <th class="text-center" style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">১ম (মূল) কপি</th>
-                                            <th class="text-center" style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">২য় কপি</th>
-                                            <th class="text-center" style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">৩য় কপি</th>
+                                            <th class="text-center"
+                                                style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">১ম
+                                                (মূল) কপি</th>
+                                            <th class="text-center"
+                                                style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">২য়
+                                                কপি</th>
+                                            <th class="text-center"
+                                                style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">৩য়
+                                                কপি</th>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="col-12">
                                     <p>
-                                        চালান নং................................................................................তারিখঃ.................................................................................<br><br>
+                                        চালান
+                                        নং................................................................................তারিখঃ.................................................................................<br><br>
                                         বাংলাদেশ ব্যাংক/সোনালী ব্যাংক
-                                        লিমিটেডের............................দোহার............................জেলা......................দোহার....................... শাখায়
+                                        লিমিটেডের............................আড়াইহাজার............................জেলা......................আড়াইহাজার.......................
+                                        শাখায়
                                         টাকা জমা দেওয়ার চালান
                                     </p>
 
                                     <div class="code-area">
-                                        <ul class="code-list first-code-list" >
+                                        <ul class="code-list first-code-list">
                                             <li style="min-width: 90px !important;">কোড নং</li>
                                             <li style="border-left: 0 !important;">১</li>
                                         </ul>
@@ -158,14 +182,16 @@
                                 <tr>
                                     <td class="text-center" colspan="4">জমা প্রদানকারী কর্তৃক পূরণ করিতে হইবে</td>
                                     <td width="20%" colspan="2" class="text-center">টাকার অংক</td>
-                                    <td rowspan="3" class="text-center">বিভাগের নাম <br> এবং চালানের পৃষ্ঠাংকনকারী <br> কর্মকর্তার
+                                    <td rowspan="3" class="text-center">বিভাগের নাম <br> এবং চালানের পৃষ্ঠাংকনকারী <br>
+                                        কর্মকর্তার
                                         <br>
                                         নাম, পদবী <br> ও দপ্তর
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">যাহার মারফত প্রদত্ত হইল তাহার নাম ও ঠিকানা</td>
-                                    <td class="text-center">যে ব্যাক্তির/প্রতিষ্ঠানের পক্ষ হইতে টাকা প্রদত্ত হইল তাহার নাম ও ঠিকানা
+                                    <td class="text-center">যে ব্যাক্তির/প্রতিষ্ঠানের পক্ষ হইতে টাকা প্রদত্ত হইল তাহার নাম ও
+                                        ঠিকানা
                                     </td>
                                     <td class="text-center">কি বাবদ জমা দেওয়া হইল তাহার বিবরণ</td>
                                     <td class="text-center">মুদ্রা ও নোটের বিবরণ/ড্রাফট, পে-অর্ডার ও চেকের বিবরণ</td>
@@ -175,37 +201,48 @@
                                 </tr>
                                 <tr>
                                     <td style="" class="text-center">
-                                       মেয়র, {{ config('app.name') }}।
+                                        মেয়র, {{ config('app.name') }}।
                                     </td>
                                     <td class="text-center">
                                         {{ $incomeExpense->receiver_name }},
-                                        ঠিকাদার, দোহার <br>
+                                        ঠিকাদার, আড়াইহাজার <br>
                                         পৌরসভা।
                                     </td>
                                     <td class="text-center">
-                                       {{ $incomeExpense->khat_des }}
+                                        {{ $incomeExpense->khat_des }}
                                     </td>
                                     <td class="text-center">
                                         চেক নং-{{ enNumberToBn($vat->check_no) }}<br>
                                         তাং- {{ enNumberToBn(\Carbon\Carbon::parse($vat->date)->format('d/m/Y')) }}<br>
                                         সোনালি ব্যাংক লিঃ, <br>
-                                        দোহার শাখা, <br>
-                                        দোহার।
+                                        আড়াইহাজার শাখা, <br>
+                                        আড়াইহাজার।
                                     </td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(number_format($vat->amount)) }}</b></td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(0).enNumberToBn(0) }}</b></td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(number_format($vat->amount)) }}</b>
+                                    </td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(0) . enNumberToBn(0) }}</b>
+                                    </td>
                                 </tr>
 
                                 <tr>
-                                    <td style="border-top: 1px solid transparent !important;" colspan="4" class="text-right"><b>মোট টাকা</b></td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(number_format($vat->amount)) }}</b></td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(0).enNumberToBn(0) }}</b></td>
+                                    <td style="border-top: 1px solid transparent !important;" colspan="4"
+                                        class="text-right"><b>মোট টাকা</b></td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(number_format($vat->amount)) }}</b>
+                                    </td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(0) . enNumberToBn(0) }}</b>
+                                    </td>
                                     <td>.</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="padding: 4px 12px;">টাকা(কথায়়ঃ) {{ $inWordBangla->bnMoney($vat->amount) }} মাত্র</td>
+                                    <td colspan="4" style="padding: 4px 12px;">টাকা(কথায়়ঃ)
+                                        {{ $inWordBangla->bnMoney($vat->amount) }} মাত্র</td>
 
-                                    <td colspan="3" style="vertical-align: initial" rowspan="3" class="text-center">ম্যানেজার <br> বাংলাদেশ ব্যাংক/সোনালী
+                                    <td colspan="3" style="vertical-align: initial" rowspan="3" class="text-center">
+                                        ম্যানেজার <br> বাংলাদেশ ব্যাংক/সোনালী
                                         ব্যাংক লিমিটেড
                                     </td>
                                 </tr>
@@ -213,39 +250,49 @@
                                     <td style="padding: 4px 12px;" colspan="4">টাকা পাওয়া গেলো</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 4px 12px;" colspan="4">তারিখঃ.............................................................</td>
+                                    <td style="padding: 4px 12px;" colspan="4">
+                                        তারিখঃ.............................................................</td>
                                 </tr>
                             </table>
                         </div>
                     @endif
-                    @if($tax)
+                    @if ($tax)
                         <div style="border-top: 2px dashed #000;margin-top: 80px"></div>
                         <div id="tax-area" style="margin-top: 60px">
                             <div class="row">
                                 <div class="col-12 form-top">
-                                    <h2  class="text-center">চালান ফরম</h2>
-                                    <p class="text-center" style="font-size: 18px;margin-bottom: 0;">টি,আর ফরম নং ৬ (এস, আর ৩৭ দ্রষ্টব্যঃ)</p>
+                                    <h2 class="text-center">চালান ফরম</h2>
+                                    <p class="text-center" style="font-size: 18px;margin-bottom: 0;">টি,আর ফরম নং ৬ (এস, আর
+                                        ৩৭ দ্রষ্টব্যঃ)</p>
 
                                 </div>
                                 <div class="col-5 offset-7">
                                     <table class="table table-bordered form-top-table">
                                         <tr>
-                                            <th class="text-center" style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">১ম (মূল) কপি</th>
-                                            <th class="text-center" style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">২য় কপি</th>
-                                            <th class="text-center" style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">৩য় কপি</th>
+                                            <th class="text-center"
+                                                style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">১ম
+                                                (মূল) কপি</th>
+                                            <th class="text-center"
+                                                style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">২য়
+                                                কপি</th>
+                                            <th class="text-center"
+                                                style="    padding: 4px 0;font-size: 12px;border-color: #000 !important;">৩য়
+                                                কপি</th>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="col-12">
                                     <p>
-                                        চালান নং................................................................................তারিখঃ.................................................................................<br><br>
+                                        চালান
+                                        নং................................................................................তারিখঃ.................................................................................<br><br>
                                         বাংলাদেশ ব্যাংক/সোনালী ব্যাংক
-                                        লিমিটেডের............................দোহার............................জেলা......................দোহার....................... শাখায়
+                                        লিমিটেডের............................আড়াইহাজার............................জেলা......................আড়াইহাজার.......................
+                                        শাখায়
                                         টাকা জমা দেওয়ার চালান
                                     </p>
 
                                     <div class="code-area">
-                                        <ul class="code-list first-code-list" >
+                                        <ul class="code-list first-code-list">
                                             <li style="min-width: 90px !important;">কোড নং</li>
                                             <li style="border-left: 0 !important;">১</li>
                                         </ul>
@@ -274,14 +321,16 @@
                                 <tr>
                                     <td class="text-center" colspan="4">জমা প্রদানকারী কর্তৃক পূরণ করিতে হইবে</td>
                                     <td width="20%" colspan="2" class="text-center">টাকার অংক</td>
-                                    <td rowspan="3" class="text-center">বিভাগের নাম <br> এবং চালানের পৃষ্ঠাংকনকারী <br> কর্মকর্তার
+                                    <td rowspan="3" class="text-center">বিভাগের নাম <br> এবং চালানের পৃষ্ঠাংকনকারী <br>
+                                        কর্মকর্তার
                                         <br>
                                         নাম, পদবী <br> ও দপ্তর
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">যাহার মারফত প্রদত্ত হইল তাহার নাম ও ঠিকানা</td>
-                                    <td class="text-center">যে ব্যাক্তির/প্রতিষ্ঠানের পক্ষ হইতে টাকা প্রদত্ত হইল তাহার নাম ও ঠিকানা
+                                    <td class="text-center">যে ব্যাক্তির/প্রতিষ্ঠানের পক্ষ হইতে টাকা প্রদত্ত হইল তাহার নাম
+                                        ও ঠিকানা
                                     </td>
                                     <td class="text-center">কি বাবদ জমা দেওয়া হইল তাহার বিবরণ</td>
                                     <td class="text-center">মুদ্রা ও নোটের বিবরণ/ড্রাফট, পে-অর্ডার ও চেকের বিবরণ</td>
@@ -295,7 +344,7 @@
                                     </td>
                                     <td class="text-center">
                                         {{ $incomeExpense->receiver_name }},
-                                        ঠিকাদার, দোহার <br>
+                                        ঠিকাদার, আড়াইহাজার <br>
                                         পৌরসভা।
                                     </td>
                                     <td class="text-center">
@@ -305,23 +354,34 @@
                                         চেক নং-{{ enNumberToBn($tax->check_no) }}<br>
                                         তাং- {{ enNumberToBn(\Carbon\Carbon::parse($tax->date)->format('d/m/Y')) }}<br>
                                         সোনালি ব্যাংক লিঃ, <br>
-                                        দোহার শাখা, <br>
-                                        দোহার।
+                                        আড়াইহাজার শাখা, <br>
+                                        আড়াইহাজার।
                                     </td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(number_format($tax->amount)) }}</b></td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(0).enNumberToBn(0) }}</b></td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(number_format($tax->amount)) }}</b>
+                                    </td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(0) . enNumberToBn(0) }}</b>
+                                    </td>
                                 </tr>
 
                                 <tr>
-                                    <td style="border-top: 1px solid transparent !important;" colspan="4" class="text-right"><b>মোট টাকা</b></td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(number_format($tax->amount)) }}</b></td>
-                                    <td style="vertical-align: baseline;" class="text-center"><b>{{ enNumberToBn(0).enNumberToBn(0) }}</b></td>
+                                    <td style="border-top: 1px solid transparent !important;" colspan="4"
+                                        class="text-right"><b>মোট টাকা</b></td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(number_format($tax->amount)) }}</b>
+                                    </td>
+                                    <td style="vertical-align: baseline;" class="text-center">
+                                        <b>{{ enNumberToBn(0) . enNumberToBn(0) }}</b>
+                                    </td>
                                     <td>.</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="padding: 4px 12px;">টাকা(কথায়়ঃ) {{ $inWordBangla->bnMoney($tax->amount) }} মাত্র</td>
+                                    <td colspan="4" style="padding: 4px 12px;">টাকা(কথায়়ঃ)
+                                        {{ $inWordBangla->bnMoney($tax->amount) }} মাত্র</td>
 
-                                    <td colspan="3" style="vertical-align: initial" rowspan="3" class="text-center">ম্যানেজার <br> বাংলাদেশ ব্যাংক/সোনালী
+                                    <td colspan="3" style="vertical-align: initial" rowspan="3"
+                                        class="text-center">ম্যানেজার <br> বাংলাদেশ ব্যাংক/সোনালী
                                         ব্যাংক লিমিটেড
                                     </td>
                                 </tr>
@@ -329,7 +389,8 @@
                                     <td colspan="4" style="padding: 4px 12px;">টাকা পাওয়া গেলো</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="padding: 4px 12px;">তারিখঃ.............................................................</td>
+                                    <td colspan="4" style="padding: 4px 12px;">
+                                        তারিখঃ.............................................................</td>
                                 </tr>
                             </table>
                         </div>
@@ -342,11 +403,10 @@
 
 @section('script')
     <script>
+        var APP_URL = '{!! url()->full() !!}';
 
-
-        var APP_URL = '{!! url()->full()  !!}';
         function getprint(print) {
-            $('.print-heading').css('display','block');
+            $('.print-heading').css('display', 'block');
             $('.extra_column').remove();
             $('body').html($('#' + print).html());
             window.print();

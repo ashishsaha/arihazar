@@ -171,11 +171,19 @@
                 <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('dashboard',['role_permission'=>request('role_permission')]) }}"
-                           class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>ড্যাশবোর্ড</p>
-                        </a>
+                        @if(auth()->user()->is_super_admin==\App\Enumeration\Role::$IS_SUPER_ADMIN)
+                            <a href="{{ route('dashboard',['role_permission'=>auth()->user()->role]) }}"
+                               class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>ড্যাশবোর্ড</p>
+                            </a>
+                        @else
+                            <a href="{{ route('dashboard',['role_permission'=>request('role_permission')]) }}"
+                               class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>ড্যাশবোর্ড</p>
+                            </a>
+                        @endif
                     </li>
                     @if(auth()->user()->is_super_admin == \App\Enumeration\Role::$IS_SUPER_ADMIN)
 

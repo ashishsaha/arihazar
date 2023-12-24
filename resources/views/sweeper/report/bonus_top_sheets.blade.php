@@ -76,7 +76,7 @@
                         <div id="printArea">
 
                             <div style="padding:10px; width:100%; text-align:center;">
-                                <h3>ফরিদপুর পৌরসভা, ফরিদপুর</h3>
+                                <h3>আড়াইহাজার পৌরসভা, নারায়নগঞ্জ</h3>
                                 <h4>পরিচ্ছন্ন কর্মীদের বোনাস </h4>
                                 @if(request()->get('bonus') != '')
                                     <h4>{{ str_replace($enBonus,$bnBonus,$bonus->bonus) }}, {{ str_replace($enMonth,$bnMonth,$bonus->month) }}-{{ str_replace($en,$bn,$bonus->year) }}</h4>
@@ -116,10 +116,10 @@
                                             {{ str_replace($enBonus,$bnBonus,$bonus->bonus) }}, {{ str_replace($enMonth,$bnMonth,$bonus->month) }}-{{ str_replace($en,$bn,$bonus->year) }}
                                         @endif বাবদ  টাঃ {{ str_replace($en,$bn,number_format($bonus->total)) }} /- মাত্র দেওয়া গেল |</p>
                                         <p style="margin-top: 70px;padding-bottom: 5px;" class="pull-left">প্রধান নির্বাহী কর্মকর্তা<br>
-                                            ফরিদপুর পৌরসভা
+                                            আড়াইহাজার পৌরসভা
                                         </p>
                                         <p style="margin-top: 70px;padding-bottom: 5px;" class="pull-right">মেয়র<br>
-                                            ফরিদপুর পৌরসভা</p>
+                                            আড়াইহাজার পৌরসভা</p>
                                     </div>
                                 </div>
                             </div>

@@ -124,7 +124,7 @@
 
                                             <header class="panel-heading">
 
-                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},ফরিদপুর</strong></h4>
+                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},নারায়নগঞ্জ</strong></h4>
                                                 <h4 style="text-align: center;"><strong> কোষাধ্যক্ষের ক্যাশ বহি (ফর্ম নং-৭৮ রুল-২০৩)</strong></h4>
                                                 <h4 style="text-align: center;">উপাংশ ১ ( সাধারন সংস্থাপন )</h4>
                                                 <h4 style="text-align: center;">ট্যাক্সেস </h4>
@@ -259,7 +259,7 @@
                                         <section class="panel">
                                             <header class="panel-heading">
 
-                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},ফরিদপুর</strong></h4>
+                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},নারায়নগঞ্জ</strong></h4>
 
                                                 <h4 style="text-align: center;"><strong> কোষাধ্যক্ষের ক্যাশ বহি (ফর্ম নং-৭৮ রুল-২০৩)</strong></h4>
                                                 <h4 style="text-align: center;">উপাংশ ১ ( সাধারন সংস্থাপন )</h4>
@@ -428,7 +428,7 @@
 
                                             <header class="panel-heading">
 
-                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},ফরিদপুর</strong></h4>
+                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},নারায়নগঞ্জ</strong></h4>
 
                                                 <h4 style="text-align: center;"><strong> কোষাধ্যক্ষের ক্যাশ বহি</strong></h4>
                                                 <h4 style="text-align: center;">উপাংশ ১ ( সাধারন সংস্থাপন )</h4>
@@ -625,7 +625,7 @@
 
                                             <header class="panel-heading">
 
-                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},ফরিদপুর</strong></h4>
+                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},নারায়নগঞ্জ</strong></h4>
 
                                                 <h4 style="text-align: center;"><strong> কোষাধ্যক্ষের ক্যাশ বহি(ফর্ম নং-৭৮ রুল-২০৩)</strong></h4>
                                                 <h4 style="text-align: center;">উপাংশ ২ (পানি সরবরাহ)</h4>
@@ -729,7 +729,7 @@
 
                                             <header class="panel-heading">
 
-                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},ফরিদপুর</strong></h4>
+                                                <h4 style="text-align: center;"><strong>{{ config('app.name') }},নারায়নগঞ্জ</strong></h4>
 
                                                 <h4 style="text-align: center;"><strong> কোষাধ্যক্ষের ক্যাশ বহি</strong></h4>
                                                 <h4 style="text-align: center;">উপাংশ ২ (পানি সরবরাহ)</h4>

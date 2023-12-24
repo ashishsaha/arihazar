@@ -206,7 +206,7 @@
                                         <!--<img src="{{asset('/')}}public/mayor.png" width="150"><br>-->
                                         <!--<strong> অমিতাভ বোস </strong><br>-->
                                         <strong>মেয়র </strong><br>
-                                        <strong>ফরিদপুর পৌরসভা , ফরিদপুর</strong>
+                                        <strong>আড়াইহাজার পৌরসভা , নারায়নগঞ্জ</strong>
                                     </div>
                                 </div>
 

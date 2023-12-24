@@ -614,6 +614,9 @@ class IncomeExpenditureController extends Controller
         $request['receive_date'] = Carbon::parse($request->receive_date)->format('Y-m-d');
         $request['vourcher_no'] = bnNumberToEn($request->vourcher_no);
 
+        $bn = array("১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "০");
+        $en = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+
         //vourcher_no
         if ($request->inout_id == 1) {
             $inVoucherNo = $request->vourcher_no;
@@ -692,7 +695,8 @@ class IncomeExpenditureController extends Controller
                 $jamanot->branch_id = $request->branch_id;
                 $jamanot->acc_no = $request->acc_no;
                 $jamanot->vourcher_no = $vourcher_no;
-                $jamanot->check_no = bnNumberToEn($request->check_no);
+//                $jamanot->check_no = bnNumberToEn($request->check_no);
+                $jamanot->check_no = str_replace($bn, $en, $request->jamanot_check_no[$counter] ?? '');
                 $jamanot->chalan_no = $chalan_no;
                 $jamanot->amount = bnNumberToEn($request->jamanot[$counter]);
                 $jamanot->date = $request->receive_date;
@@ -720,7 +724,8 @@ class IncomeExpenditureController extends Controller
                 $vat->bank_id = $request->bank_id;
                 $vat->branch_id = $request->branch_id;
                 $vat->acc_no = $request->acc_no;
-                $vat->check_no = bnNumberToEn($request->check_no);
+//                $vat->check_no = bnNumberToEn($request->check_no);
+                $vat->check_no = str_replace($bn, $en, $request->vat_check_no[$counter] ?? '');
                 $vat->vourcher_no = $vourcher_no;
                 $vat->amount = bnNumberToEn($request->vat[$counter]);
                 $vat->date = $request->receive_date;
@@ -752,7 +757,8 @@ class IncomeExpenditureController extends Controller
                 $tax->status = $status;
                 $tax->vat_tax_status = $incoexpenseid->incoexpenses_id;
                 $tax->chalan_no = $chalan_no;
-                $tax->check_no = bnNumberToEn($request->check_no);
+//                $tax->check_no = bnNumberToEn($request->check_no);
+                $tax->check_no = str_replace($bn, $en, $request->tax_check_no[$counter] ?? '');
                 $tax->amount = bnNumberToEn($request->tax[$counter]);
                 $tax->date = $request->receive_date;
                 $tax->receiver_name = '১/১১৪১/০০১০/০১১১';

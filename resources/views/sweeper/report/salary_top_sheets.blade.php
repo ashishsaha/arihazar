@@ -119,7 +119,7 @@
                         <div id="printArea">
 
                             <div style="padding:10px; width:100%; text-align:center;">
-                                <h3>ফরিদপুর পৌরসভা, ফরিদপুর</h3>
+                                <h3>আড়াইহাজার পৌরসভা, নারায়নগঞ্জ</h3>
                                 <h4>পরিচ্ছন্ন কর্মীদের {{ request()->get('bi_month') == 1 ? 'প্রথম পাক্ষিক' : (request()->get('bi_month') == 2 ? 'দ্বিতীয় পাক্ষিক' :'মাসিক ')}} বিল</h4>
                                 @if(request()->get('year') != '')
                                     <h4>
@@ -168,12 +168,12 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <p style="margin-top: 70px;padding-bottom: 5px;" class="pull-left">প্রধান নির্বাহী কর্মকর্তা<br>
-                                                    ফরিদপুর পৌরসভা
+                                                    আড়াইহাজার পৌরসভা
                                                 </p>
                                             </div>
                                             <div class="col-6">
                                                 <p style="margin-top: 70px;padding-bottom: 5px;" class="pull-right">মেয়র<br>
-                                                    ফরিদপুর পৌরসভা</p>
+                                                    আড়াইহাজার পৌরসভা</p>
                                             </div>
                                         </div>
 
