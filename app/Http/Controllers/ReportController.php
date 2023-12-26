@@ -34,8 +34,11 @@ class ReportController extends Controller
                 ->where('cotractoraccounts.contractor_id', $request->contractor)
                 ->get();
         }
-        return view('accounts.project.report.register', compact('selectContractor',
-            'contractors', 'projectPayments'));
+        return view('accounts.project.report.register', compact(
+            'selectContractor',
+            'contractors',
+            'projectPayments'
+        ));
     }
 
     public function projectPaymentCertificate(Request $request)
@@ -49,10 +52,12 @@ class ReportController extends Controller
             $projects = Cotractoraccount::where('contractor_id', $request->contractor)
                 //->where('contractyear',$request->financial_year)
                 ->get();
-
         }
-        return view('accounts.project.report.certificate', compact('selectContractor',
-            'contractors', 'projects'));
+        return view('accounts.project.report.certificate', compact(
+            'selectContractor',
+            'contractors',
+            'projects'
+        ));
     }
 
 
@@ -70,7 +75,6 @@ class ReportController extends Controller
 
                 Incoexpense::where('incoexpenses_id', $x)
                     ->update(['status' => 1]);
-
             }
             return redirect()->back()->with('message', 'সকল অনুমোদন সফল হয়েছে');
         }
@@ -102,8 +106,6 @@ class ReportController extends Controller
             return response()->json(['success' => true, 'message' => 'অনুমোদন সফল হয়েছে']);
         }
         return response()->json(['success' => false, 'message' => 'ডাটা ফিল্টারিং ভুল হয়েছে']);
-
-
     }
 
     public function chequeRegisterDelete(Request $request)
@@ -116,7 +118,6 @@ class ReportController extends Controller
             return response()->json(['success' => true, 'message' => 'মুছে ফেলা হয়েছে']);
         }
         return response()->json(['success' => false, 'message' => 'ডাটা ফিল্টারিং ভুল হয়েছে']);
-
     }
 
     public function chequeRegisterPrint(Incoexpense $incomeExpense)
@@ -135,13 +136,13 @@ class ReportController extends Controller
     {
 
         $numberToWord = new NumberToBangla();
-        if ($incomeExpense->cheque_amount > 0){
+        if ($incomeExpense->cheque_amount > 0) {
             $chequeAmount = $incomeExpense->cheque_amount;
-        }else{
+        } else {
             $chequeAmount = $incomeExpense->amount;
         }
         $incomeExpense->amount_in_word = $numberToWord->bnWord($chequeAmount);
-        return view('accounts.report.cheque_print_old', compact('chequeAmount','numberToWord', 'incomeExpense'));
+        return view('accounts.report.cheque_print_old', compact('chequeAmount', 'numberToWord', 'incomeExpense'));
     }
 
     public function challanPrint(Incoexpense $incomeExpense)
@@ -149,14 +150,21 @@ class ReportController extends Controller
         $vat = Incoexpense::where('vat_tax_status', $incomeExpense->incoexpenses_id)->where('receiver_name', '১/১১৩৩/০০৫/০৩১১')->first();
         $tax = Incoexpense::where('vat_tax_status', $incomeExpense->incoexpenses_id)->where('receiver_name', '১/১১৪১/০০১০/০১১১')->first();
         if ($vat) {
-            $vat->amount_in_word = DecimalToWords::convert($vat->amount, 'Taka',
-                'Poisa');
+            $vat->amount_in_word = DecimalToWords::convert(
+                $vat->amount,
+                'Taka',
+                'Poisa'
+            );
         }
         if ($tax) {
-            $tax->amount_in_word = DecimalToWords::convert($tax->amount, 'Taka',
-                'Poisa');
+            $tax->amount_in_word = DecimalToWords::convert(
+                $tax->amount,
+                'Taka',
+                'Poisa'
+            );
         }
         $inWordBangla = new NumberToBangla();
+        // dd($vat, $tax);
 
         return view('accounts.report.challan_print', compact('incomeExpense', 'tax', 'vat', 'inWordBangla'));
     }
@@ -235,7 +243,6 @@ class ReportController extends Controller
                 $vat->receive_datwe = Carbon::parse($request->date);
                 $vat->note = $request->note;
                 $vat->save();
-
             } else { // row but vat not exist
 
                 Incoexpense::where('vat_tax_status', $request->income_expense_id)->where('receiver_name', '১/১১৩৩/০০৫/০৩১১')->delete();
@@ -261,7 +268,6 @@ class ReportController extends Controller
             $newvat->receive_datwe = Carbon::parse($request->date);
             $newvat->note = $request->note;
             $newvat->save();
-
         }
 
         $tax = Incoexpense::where('vat_tax_status', $request->income_expense_id)->where('receiver_name', '১/১১৪১/০০১০/০১১১');
@@ -278,7 +284,6 @@ class ReportController extends Controller
                 $tax->receive_datwe = Carbon::parse($request->date);
                 $tax->note = $request->note;
                 $tax->save();
-
             } else { // row but vat not exist
 
                 Incoexpense::where('vat_tax_status', $request->income_expense_id)->where('receiver_name', '১/১১৪১/০০১০/০১১১')->delete();
@@ -302,41 +307,40 @@ class ReportController extends Controller
             $newtax->receiver_name = '১/১১৪১/০০১০/০১১১';
             $newtax->note = $request->note;
             $newtax->save();
-
         }
 
 
         return response()->json(['success' => 'আয়/ব্যয় সংযুক্তি হালনাগাদ হয়েছে']);
-
     }
 
-    public function chequeRegister(Request $request){
+    public function chequeRegister(Request $request)
+    {
         $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
         $expenses = [];
         if ($request->start_date != '' && $request->end_date != '') {
 
             $expenses = Incoexpense::with('upangsho', 'taxType', 'taxSubType', 'sector', 'bank', 'branch', 'bankAccount')
                 ->where('inout_id', 2)
-                 ->where('status', 0)
+                ->where('status', 0)
                 ->where('upangsho_id', $request->upangsho)
                 ->where('year', $request->financial_year)
                 ->whereBetween('receive_datwe', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
                 ->get();
         }
-        
+
         return view('accounts.report.cheque_register', compact('sections', 'expenses'));
     }
 
 
     public function incomeUncash(Request $request)
     {
-        $incomes = Incoexpense::join('upangshos','upangshos.upangsho_id','=','incoexpenses.upangsho_id')
-            ->join('khattypes','khattypes.khat_id','=','incoexpenses.inout_id')
-            ->join('khats','khats.khat_id','=','incoexpenses.khat_id')
-            ->join('tax_types','tax_types.tax_id','=','incoexpenses.khattype_id')
-            ->join('banks','banks.bank_id','=','incoexpenses.bank_id')
-            ->join('branches','branches.branch_id','=','incoexpenses.branch_id')
-            ->join('bank_details','bank_details.bank_details_id','=','incoexpenses.acc_no')
+        $incomes = Incoexpense::join('upangshos', 'upangshos.upangsho_id', '=', 'incoexpenses.upangsho_id')
+            ->join('khattypes', 'khattypes.khat_id', '=', 'incoexpenses.inout_id')
+            ->join('khats', 'khats.khat_id', '=', 'incoexpenses.khat_id')
+            ->join('tax_types', 'tax_types.tax_id', '=', 'incoexpenses.khattype_id')
+            ->join('banks', 'banks.bank_id', '=', 'incoexpenses.bank_id')
+            ->join('branches', 'branches.branch_id', '=', 'incoexpenses.branch_id')
+            ->join('bank_details', 'bank_details.bank_details_id', '=', 'incoexpenses.acc_no')
             ->where('inout_id', 1)
             ->where('uncashstatus', 1)
             ->get();
@@ -346,13 +350,13 @@ class ReportController extends Controller
     public function expenseUncash(Request $request)
     {
 
-        $expenses = Incoexpense::join('upangshos','upangshos.upangsho_id','=','incoexpenses.upangsho_id')
-            ->join('khattypes','khattypes.khat_id','=','incoexpenses.inout_id')
-            ->join('khats','khats.khat_id','=','incoexpenses.khat_id')
-            ->join('tax_types','tax_types.tax_id','=','incoexpenses.khattype_id')
-            ->join('banks','banks.bank_id','=','incoexpenses.bank_id')
-            ->join('branches','branches.branch_id','=','incoexpenses.branch_id')
-            ->join('bank_details','bank_details.bank_details_id','=','incoexpenses.acc_no')
+        $expenses = Incoexpense::join('upangshos', 'upangshos.upangsho_id', '=', 'incoexpenses.upangsho_id')
+            ->join('khattypes', 'khattypes.khat_id', '=', 'incoexpenses.inout_id')
+            ->join('khats', 'khats.khat_id', '=', 'incoexpenses.khat_id')
+            ->join('tax_types', 'tax_types.tax_id', '=', 'incoexpenses.khattype_id')
+            ->join('banks', 'banks.bank_id', '=', 'incoexpenses.bank_id')
+            ->join('branches', 'branches.branch_id', '=', 'incoexpenses.branch_id')
+            ->join('bank_details', 'bank_details.bank_details_id', '=', 'incoexpenses.acc_no')
             ->where('inout_id', 2)
             ->where('uncashstatus', 1)
             ->get();
@@ -382,7 +386,7 @@ class ReportController extends Controller
                 ->where('upangsho_id', $request->upangsho)
                 ->where('inout_id', 1)
                 ->whereBetween('receive_datwe', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
-                 ->orderBy('receive_datwe','ASC')
+                ->orderBy('receive_datwe', 'ASC')
                 ->get();
 
             $expenses = Incoexpense::with('upangsho', 'bank', 'branch', 'bankAccount')
@@ -390,12 +394,17 @@ class ReportController extends Controller
                 ->where('inout_id', 2)
                 ->where('status', 1)
                 ->whereBetween('receive_datwe', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
-                 ->orderBy('receive_datwe','ASC')
+                ->orderBy('receive_datwe', 'ASC')
                 ->get();
         }
 
-        return view('accounts.report.cashbook', compact('sections', 'selectUpangsho',
-            'expenses', 'incomes', 'balance'));
+        return view('accounts.report.cashbook', compact(
+            'sections',
+            'selectUpangsho',
+            'expenses',
+            'incomes',
+            'balance'
+        ));
     }
 
 
@@ -421,7 +430,7 @@ class ReportController extends Controller
 
     public function cashbookExpense(Request $request)
     {
-        $banks = Bank::where('sister_concern_id',1)->get();
+        $banks = Bank::where('sister_concern_id', 1)->get();
         $selectBankAccount = null;
         $expenses = [];
         if ($request->bank_account != '') {
@@ -434,13 +443,16 @@ class ReportController extends Controller
                 ->get();
         }
 
-        return view('accounts.report.cashbook_expense', compact('banks',
-            'expenses', 'selectBankAccount'));
+        return view('accounts.report.cashbook_expense', compact(
+            'banks',
+            'expenses',
+            'selectBankAccount'
+        ));
     }
 
     public function cashbookIncome(Request $request)
     {
-        $banks = Bank::where('sister_concern_id',1)->get();
+        $banks = Bank::where('sister_concern_id', 1)->get();
         $selectBankAccount = null;
         $incomes = [];
         if ($request->bank_account != '') {
@@ -454,13 +466,16 @@ class ReportController extends Controller
                 ->get();
         }
 
-        return view('accounts.report.cashbook_income', compact('banks',
-            'incomes', 'selectBankAccount'));
+        return view('accounts.report.cashbook_income', compact(
+            'banks',
+            'incomes',
+            'selectBankAccount'
+        ));
     }
 
     public function bankAccountClosing(Request $request)
     {
-        $banks = Bank::where('sister_concern_id',1)->get();
+        $banks = Bank::where('sister_concern_id', 1)->get();
         $selectBankAccount = null;
         $sd = null;
         $ed = null;
@@ -489,8 +504,8 @@ class ReportController extends Controller
             $getIncomes = Incoexpense::where('acc_no', $request->bank_account)
                 ->where('inout_id', 1)
                 ->whereBetween('receive_datwe', [$sd, $ed])
-                ->select('acc_no','khat_id')
-                ->groupBy('acc_no','khat_id')
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
                 ->get();
 
 
@@ -498,26 +513,34 @@ class ReportController extends Controller
                 ->where('inout_id', 2)
                 ->where('status', 1)
                 ->whereBetween('receive_datwe', [$sd, $ed])
-                ->select('acc_no','khat_id')
-                ->groupBy('acc_no','khat_id')
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
                 ->get();
 
             $inCnt = $getIncomes->count();
             $exCnt = $getExpenses->count();
             $diff = ($inCnt - $exCnt) - 3;
 
-            for($i=0; $i < abs($diff); $i++){
-                if($inCnt < $exCnt){
+            for ($i = 0; $i < abs($diff); $i++) {
+                if ($inCnt < $exCnt) {
                     $incomeBlankRows .= '<tr><td>-</td><td></td><td></td></tr>';
-                }else{
+                } else {
                     $expenseBlankRows .= '<tr> <td>--- </td> <td> </td> <td> </td></tr>';
                 }
             }
         }
 
-        return view('accounts.report.bank_account_closing', compact('banks',
-            'sd','ed', 'selectBankAccount','balance','incomeBlankRows','expenseBlankRows',
-        'getExpenses','getIncomes'));
+        return view('accounts.report.bank_account_closing', compact(
+            'banks',
+            'sd',
+            'ed',
+            'selectBankAccount',
+            'balance',
+            'incomeBlankRows',
+            'expenseBlankRows',
+            'getExpenses',
+            'getIncomes'
+        ));
     }
 
     public function incomeExpenditure(Request $request)
@@ -553,8 +576,8 @@ class ReportController extends Controller
             $getIncomes = Incoexpense::where('upangsho_id', $request->upangsho)
                 ->where('inout_id', 1)
                 ->whereBetween('receive_datwe', [$sd, $ed])
-                ->select('acc_no','khat_id')
-                ->groupBy('acc_no','khat_id')
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
                 ->get();
 
 
@@ -562,49 +585,59 @@ class ReportController extends Controller
                 ->where('inout_id', 2)
                 ->where('status', 1)
                 ->whereBetween('receive_datwe', [$sd, $ed])
-                ->select('acc_no','khat_id')
-                ->groupBy('acc_no','khat_id')
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
                 ->get();
 
             $inCnt = $getIncomes->count();
             $exCnt = $getExpenses->count();
             $diff = ($inCnt - $exCnt) - 3;
 
-            for($i=0; $i < abs($diff); $i++){
-                if($inCnt < $exCnt){
+            for ($i = 0; $i < abs($diff); $i++) {
+                if ($inCnt < $exCnt) {
                     $incomeBlankRows .= '<tr><td>-</td><td></td><td></td></tr>';
-                }else{
+                } else {
                     $expenseBlankRows .= '<tr> <td>--- </td> <td> </td> <td> </td></tr>';
                 }
             }
         }
 
-        return view('accounts.report.income_expenditure_amount', compact('sections',
-            'sd','ed', 'selectBankAccount','balance','incomeBlankRows','expenseBlankRows',
-        'getExpenses','getIncomes', 'selectUpangsho'));
+        return view('accounts.report.income_expenditure_amount', compact(
+            'sections',
+            'sd',
+            'ed',
+            'selectBankAccount',
+            'balance',
+            'incomeBlankRows',
+            'expenseBlankRows',
+            'getExpenses',
+            'getIncomes',
+            'selectUpangsho'
+        ));
     }
 
 
 
 
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $upangsho_id ='';
+    public function index()
+    {
+        $upangsho_id = '';
         $taxTypes = '';
         $upangshos = upangsho::all();
-        $khats = Khat::where('upangsho_id',3)->where('khattype', 2)->get();
+        $khats = Khat::where('upangsho_id', 3)->where('khattype', 2)->get();
         $years = Budget::select('year')->groupBy('year')->get();
         $menuname = 'রিপোর্টস';
 
-        return view('accounts.report.income_expenditure_amount', compact('upangsho_id', 'menuname','upangshos','khats','taxTypes', 'years'));
+        return view('accounts.report.income_expenditure_amount', compact('upangsho_id', 'menuname', 'upangshos', 'khats', 'taxTypes', 'years'));
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -612,13 +645,16 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        $upangshoname ='';
-        $upangsho_id = $request->upangsho_id; $sd = $request->sd; $ed = $request->ed;
+        $upangshoname = '';
+        $upangsho_id = $request->upangsho_id;
+        $sd = $request->sd;
+        $ed = $request->ed;
         $badgetRegister = Upangsho::getBalancesheet($upangsho_id, $sd, $ed);
         dd($badgetRegister);
         $upangshos = upangsho::all();
-        if($upangsho_id!=''){
-        $upangshoname = upangsho::where('upangsho_id', $upangsho_id)->first()->upangsho_name; }
+        if ($upangsho_id != '') {
+            $upangshoname = upangsho::where('upangsho_id', $upangsho_id)->first()->upangsho_name;
+        }
         $khats = Khat::all();
         $years = Budget::select('year')->groupBy('year')->get();
         $menuname = 'রিপোর্টস';
@@ -626,22 +662,30 @@ class ReportController extends Controller
         //  $khattypeid = $request->khattype_id;
         $year = $request->year;
         $budget = Upangsho::getBadget();
-         $taxTypes = '';
+        $taxTypes = '';
 
-         return view('accounts.report.income_expenditure_amount', compact('banks',
-            'sd','ed', 'selectBankAccount','balance','incomeBlankRows','expenseBlankRows',
-        'getExpenses','getIncomes'));
+        return view('accounts.report.income_expenditure_amount', compact(
+            'banks',
+            'sd',
+            'ed',
+            'selectBankAccount',
+            'balance',
+            'incomeBlankRows',
+            'expenseBlankRows',
+            'getExpenses',
+            'getIncomes'
+        ));
     }
 
 
     public function create(Request $request)
     {
-       $data ='<option value="">খাত নির্ধারণ</option>';
-       $taxtptp = Khat::where('upangsho_id', $request->upan)->where('khattype', $request->inout)->where('tax_type_id', $request->khattype)->where('tax_type_type_id', $request->khattype2)->get();
+        $data = '<option value="">খাত নির্ধারণ</option>';
+        $taxtptp = Khat::where('upangsho_id', $request->upan)->where('khattype', $request->inout)->where('tax_type_id', $request->khattype)->where('tax_type_type_id', $request->khattype2)->get();
 
-        foreach($taxtptp as $tp){
+        foreach ($taxtptp as $tp) {
 
-            $data .= '<option value="'.$tp->khat_id.'">'.$tp->serilas.$tp->khat_name.'</option>';
+            $data .= '<option value="' . $tp->khat_id . '">' . $tp->serilas . $tp->khat_name . '</option>';
         }
         echo $data;
     }
@@ -666,10 +710,10 @@ class ReportController extends Controller
 
         if ($request->upangsho != '' && $request->financial_year != '') {
 
-            [$startFullYear,$endHalfYear] = explode('-',$request->financial_year);
+            [$startFullYear, $endHalfYear] = explode('-', $request->financial_year);
 
-            $sd = Carbon::createFromFormat('Y-m-d', $startFullYear.'-07-01')->format('Y-m-d');
-            $ed = Carbon::createFromFormat('Y-m-d', ($startFullYear + 1).'-06-30')->format('Y-m-d');
+            $sd = Carbon::createFromFormat('Y-m-d', $startFullYear . '-07-01')->format('Y-m-d');
+            $ed = Carbon::createFromFormat('Y-m-d', ($startFullYear + 1) . '-06-30')->format('Y-m-d');
 
             $upangsho_id = $request->upangsho;
 
@@ -694,68 +738,78 @@ class ReportController extends Controller
                 ->select('khat_id')
                 ->groupBy('khat_id')
                 ->get();
-                foreach ($getIncomes as $income) {
-                    $budget = Budget::where('khat_id', $income->khat_id)
-                        ->where('year', $request->financial_year)
-                        ->first();
+            foreach ($getIncomes as $income) {
+                $budget = Budget::where('khat_id', $income->khat_id)
+                    ->where('year', $request->financial_year)
+                    ->first();
 
-                    $income->budget = $budget ? $budget->budget_amo : 0;
-                }
+                $income->budget = $budget ? $budget->budget_amo : 0;
+            }
 
             $getExpenses = Incoexpense::where('upangsho_id', $request->upangsho)
                 ->where('inout_id', 2)
                 ->where('status', 1)
-                ->where('khat_id','!=',0)
+                ->where('khat_id', '!=', 0)
                 ->whereBetween('receive_datwe', [$sd, $ed])
                 ->select('khat_id')
                 ->groupBy('khat_id')
                 ->get();
-                // dd($getExpenses);
-                foreach ($getExpenses as $expense) {
-                    // dd($expense);
-                    $budget = Budget::where('khat_id', $expense->khat_id)
-                        ->where('year', $request->financial_year)
-                        ->first();
-                    $expense->budget = $budget ? $budget->budget_amo : 0;
-                }
-        }
-        else
-        {
+            // dd($getExpenses);
+            foreach ($getExpenses as $expense) {
+                // dd($expense);
+                $budget = Budget::where('khat_id', $expense->khat_id)
+                    ->where('year', $request->financial_year)
+                    ->first();
+                $expense->budget = $budget ? $budget->budget_amo : 0;
+            }
+        } else {
             $getIncomes = Incoexpense::where('upangsho_id', $request->upangsho)
-                        ->where('inout_id', 1)
-                        ->whereBetween('receive_datwe', [$sd, $ed])
-                        ->select('acc_no','khat_id')
-                        ->groupBy('acc_no','khat_id')
-                        ->get();
+                ->where('inout_id', 1)
+                ->whereBetween('receive_datwe', [$sd, $ed])
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
+                ->get();
 
             $getExpenses = Incoexpense::where('upangsho_id', $request->upangsho)
-                        ->where('inout_id', 2)
-                        ->where('status', 1)
-                        ->whereBetween('receive_datwe', [$sd, $ed])
-                        ->select('acc_no','khat_id')
-                        ->groupBy('acc_no','khat_id')
-                        ->get();
+                ->where('inout_id', 2)
+                ->where('status', 1)
+                ->whereBetween('receive_datwe', [$sd, $ed])
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
+                ->get();
         }
 
         $inCnt = $getIncomes->count();
         $exCnt = $getExpenses->count();
         $diff = ($inCnt - $exCnt);
 
-        for($i=0; $i < abs($diff); $i++){
-            if($inCnt < $exCnt){
+        for ($i = 0; $i < abs($diff); $i++) {
+            if ($inCnt < $exCnt) {
                 $incomeBlankRows .= '<tr><td>-</td><td></td><td></td><td></td><td></td></tr>';
-            }else{
+            } else {
                 $expenseBlankRows .= '<tr><td>-</td><td></td><td></td><td></td><td></td></tr>';
             }
         }
-        return view('accounts.report.yearly_income_expenditure', compact('sections',
-            'sd','ed', 'selectBankAccount','balance','incomeBlankRows','expenseBlankRows',
-        'getExpenses','getIncomes', 'selectUpangsho', 'financial_year', 'bn', 'en'));
+        return view('accounts.report.yearly_income_expenditure', compact(
+            'sections',
+            'sd',
+            'ed',
+            'selectBankAccount',
+            'balance',
+            'incomeBlankRows',
+            'expenseBlankRows',
+            'getExpenses',
+            'getIncomes',
+            'selectUpangsho',
+            'financial_year',
+            'bn',
+            'en'
+        ));
     }
 
-   public function dailyIncomeExpenditure(Request $request)
-   {
-    $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
+    public function dailyIncomeExpenditure(Request $request)
+    {
+        $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
         $selectBankAccount = null;
         $sd = null;
         $ed = null;
@@ -786,8 +840,8 @@ class ReportController extends Controller
             $getIncomes = Incoexpense::where('upangsho_id', $request->upangsho)
                 ->where('inout_id', 1)
                 ->whereBetween('receive_datwe', [$sd, $ed])
-                ->select('acc_no','khat_id')
-                ->groupBy('acc_no','khat_id')
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
                 ->get();
 
 
@@ -795,32 +849,42 @@ class ReportController extends Controller
                 ->where('inout_id', 2)
                 ->where('status', 1)
                 ->whereBetween('receive_datwe', [$sd, $ed])
-                ->select('acc_no','khat_id')
-                ->groupBy('acc_no','khat_id')
+                ->select('acc_no', 'khat_id')
+                ->groupBy('acc_no', 'khat_id')
                 ->get();
 
             $inCnt = $getIncomes->count();
             $exCnt = $getExpenses->count();
             $diff = ($inCnt - $exCnt);
 
-            for($i=0; $i < abs($diff); $i++){
-                if($inCnt < $exCnt){
+            for ($i = 0; $i < abs($diff); $i++) {
+                if ($inCnt < $exCnt) {
                     $incomeBlankRows .= '<tr><td>-</td><td></td><td></td></tr>';
-                }else{
+                } else {
                     $expenseBlankRows .= '<tr> <td>--- </td> <td> </td> <td> </td></tr>';
                 }
             }
         }
-        return view('accounts.report.daily_income_expenditure', compact('sections',
-        'sd','ed', 'selectBankAccount','balance','incomeBlankRows','expenseBlankRows',
-    'getExpenses','getIncomes', 'selectUpangsho'));
-   }
+        return view('accounts.report.daily_income_expenditure', compact(
+            'sections',
+            'sd',
+            'ed',
+            'selectBankAccount',
+            'balance',
+            'incomeBlankRows',
+            'expenseBlankRows',
+            'getExpenses',
+            'getIncomes',
+            'selectUpangsho'
+        ));
+    }
 
-   public function incomeBudget(Request $request){
-//        dd($request->all());
+    public function incomeBudget(Request $request)
+    {
+        //        dd($request->all());
         $selectBankAccount = null;
         $financial_year = Budget::select('year')->groupBy('year')->get();
-        $selected_financial_year="";
+        $selected_financial_year = "";
         $khattypes = [];
         $badget = 0;
         $selectUpangsho = null;
@@ -829,66 +893,67 @@ class ReportController extends Controller
         if ($request->upangsho != '') {
             $selected_financial_year = $request->financial_year;
             $upangsho_id = $request->upangsho;
-            $khattypes = TaxType::where('sister_concern_id',1)->where('upangsho_id', $upangsho_id)->where('khat_id', 1)->get();
+            $khattypes = TaxType::where('sister_concern_id', 1)->where('upangsho_id', $upangsho_id)->where('khat_id', 1)->get();
             $badget = Budget::getinbudget($upangsho_id, $selected_financial_year, 1);
             $selectUpangsho = Upangsho::find($request->upangsho);
         }
-       return view('accounts.report.income_budget', compact('khattypes','badget','sections','selectUpangsho', 'financial_year','selected_financial_year'));
-   }
+        return view('accounts.report.income_budget', compact('khattypes', 'badget', 'sections', 'selectUpangsho', 'financial_year', 'selected_financial_year'));
+    }
 
 
 
-   public function expenditureBudget(Request $request){
-       //dd($request->all());
-       $selectBankAccount = null;
-       $financial_year = Budget::select('year')->groupBy('year')->get();
-       $selected_financial_year="";
-       $khattypes = [];
-       $badget = 0;
-       $selectUpangsho = null;
-       $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
+    public function expenditureBudget(Request $request)
+    {
+        //dd($request->all());
+        $selectBankAccount = null;
+        $financial_year = Budget::select('year')->groupBy('year')->get();
+        $selected_financial_year = "";
+        $khattypes = [];
+        $badget = 0;
+        $selectUpangsho = null;
+        $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
 
-       if ($request->upangsho != '') {
-           $selected_financial_year = $request->financial_year;
-           $upangsho_id = $request->upangsho;
-           $khattypes = TaxType::where('sister_concern_id',1)->where('upangsho_id', $upangsho_id)->where('khat_id', 1)->get();
-           $badget = Budget::getinbudget($upangsho_id, $selected_financial_year, 2);
-           $selectUpangsho = Upangsho::find($request->upangsho);
-       }
-       return view('accounts.report.expense_budget', compact('khattypes','badget','sections','selectUpangsho', 'financial_year','selected_financial_year'));
-   }
+        if ($request->upangsho != '') {
+            $selected_financial_year = $request->financial_year;
+            $upangsho_id = $request->upangsho;
+            $khattypes = TaxType::where('sister_concern_id', 1)->where('upangsho_id', $upangsho_id)->where('khat_id', 1)->get();
+            $badget = Budget::getinbudget($upangsho_id, $selected_financial_year, 2);
+            $selectUpangsho = Upangsho::find($request->upangsho);
+        }
+        return view('accounts.report.expense_budget', compact('khattypes', 'badget', 'sections', 'selectUpangsho', 'financial_year', 'selected_financial_year'));
+    }
 
 
-   public function bankDetailsReport()
-   {
+    public function bankDetailsReport()
+    {
         $bankDetails = BankDetails::with('bank', 'branch')->get();
         $years = Incoexpense::select('year')->groupBy('year')->get();
 
         return view('accounts.report.bank_details_report', compact('years', 'bankDetails'));
-   }
+    }
 
     public function vat(Request $request)
     {
         $vats = [];
         if ($request->start_date != '' && $request->end_date != '') {
-            $vats = Incoexpense::join('khats','khats.khat_id','=','incoexpenses.khat_id')
+            $vats = Incoexpense::join('khats', 'khats.khat_id', '=', 'incoexpenses.khat_id')
                 ->whereBetween('receive_datwe', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
                 ->where('receiver_name', '১/১১৩৩/০০৫/০৩১১')
                 ->get();
         }
-        return view('accounts.report.vat',compact('vats'));
-   }
+        return view('accounts.report.vat', compact('vats'));
+    }
     public function tax(Request $request)
     {
         $taxs = [];
         if ($request->start_date != '' && $request->end_date != '') {
-            $taxs = Incoexpense::join('khats','khats.khat_id','=','incoexpenses.khat_id')
+            $taxs = Incoexpense::join('khats', 'khats.khat_id', '=', 'incoexpenses.khat_id')
                 ->whereBetween('receive_datwe', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
                 ->where('receiver_name', '১/১১৪১/০০১০/০১১১')
                 ->get();
         }
-        return view('accounts.report.tax',compact('taxs'));
-   }
+        return view('accounts.report.tax', compact('taxs'));
+    }
     public function budgetRegister(Request $request)
     {
         $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
@@ -900,16 +965,19 @@ class ReportController extends Controller
             $budget = Budget::where('khat_id', $request->sector)
                 ->where('year', $request->financial_year)->first();
 
-            if ($budget){
+            if ($budget) {
                 $registers = Incoexpense::where('khat_id', $request->sector)
                     ->where('year', $request->financial_year)
                     ->orderBy('receive_datwe')
                     ->get();
             }
         }
-        return view('accounts.report.budget_register',compact('registers',
-        'sections','budget'));
-   }
+        return view('accounts.report.budget_register', compact(
+            'registers',
+            'sections',
+            'budget'
+        ));
+    }
     public function dailyAbstractRegister(Request $request)
     {
         $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
@@ -935,8 +1003,8 @@ class ReportController extends Controller
                 ->toArray();
 
 
-            $mainHeads = TaxType::whereIn('tax_id',$ids1)->get();
-            $expDates = Incoexpense::whereIn('khattype_id',$ids1)->where('status', 1)
+            $mainHeads = TaxType::whereIn('tax_id', $ids1)->get();
+            $expDates = Incoexpense::whereIn('khattype_id', $ids1)->where('status', 1)
                 ->whereBetween('date', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')])
                 ->orderBy('date')->get();
 
@@ -944,9 +1012,16 @@ class ReportController extends Controller
             $month = Carbon::parse($request->start_date)->format('Y-m-d');
             $preids = '';
         }
-        return view('accounts.report.daily_abstract_register',compact('registers',
-        'sections','mainHeads','expDates','month','preids','ids2'));
-   }
+        return view('accounts.report.daily_abstract_register', compact(
+            'registers',
+            'sections',
+            'mainHeads',
+            'expDates',
+            'month',
+            'preids',
+            'ids2'
+        ));
+    }
     public function abstractRegister(Request $request)
     {
 
@@ -973,8 +1048,8 @@ class ReportController extends Controller
                 ->take(PHP_INT_MAX)
                 ->pluck('tax_id')
                 ->toArray();
-            [$year,$month] = explode('/',$request->month_of_sale);
-            $month = $month.'-'.$year.'-';
+            [$year, $month] = explode('/', $request->month_of_sale);
+            $month = $month . '-' . $year . '-';
 
             $ids1 = TaxType::select('tax_id')->where('upangsho_id', $request->upangsho)
                 ->where('khat_id', $request->income_expenditure)
@@ -988,43 +1063,49 @@ class ReportController extends Controller
                 ->pluck('tax_id')
                 ->toArray();
 
-            $mainHeads1 = TaxType::whereIn('tax_id',$ids1)->get();
+            $mainHeads1 = TaxType::whereIn('tax_id', $ids1)->get();
 
             $expDates1 = Incoexpense::whereIn('khattype_id', $ids1)
                 ->where('status', 1)
-                ->where('date', 'like', $month.'%')
+                ->where('date', 'like', $month . '%')
                 ->select('date')
                 ->groupBy(['date'])
                 ->orderBy('date')
                 ->get();
 
 
-            $mainHeads2 = TaxType::whereIn('tax_id',$ids2)->get();
+            $mainHeads2 = TaxType::whereIn('tax_id', $ids2)->get();
 
-            $expDates2 = Incoexpense::whereIn('khattype_id',$ids2)
+            $expDates2 = Incoexpense::whereIn('khattype_id', $ids2)
                 ->where('status', 1)
-                ->where('date', 'like', $month.'%')
+                ->where('date', 'like', $month . '%')
                 ->select('date')
                 ->groupBy(['date'])
                 ->orderBy('date')
                 ->get();
-
-
-
         }
-        return view('accounts.report.abstract_register',compact('registers',
-        'sections','mainHeads1','mainHeads2','expDates1','expDates2','month','ids2','month'));
-   }
+        return view('accounts.report.abstract_register', compact(
+            'registers',
+            'sections',
+            'mainHeads1',
+            'mainHeads2',
+            'expDates1',
+            'expDates2',
+            'month',
+            'ids2',
+            'month'
+        ));
+    }
     public function abstractRegisterQuarterly(Request $request)
     {
 
         $sections = Upangsho::where('upangsho_id', '!=', 0)->get();
-        $mainHeads =[];
-        $headText =null;
-        $monthHeadNumber =null;
-        $monthHeadText =null;
-        $banlgaLetter =null;
-        $year =null;
+        $mainHeads = [];
+        $headText = null;
+        $monthHeadNumber = null;
+        $monthHeadText = null;
+        $banlgaLetter = null;
+        $year = null;
         if ($request->upangsho != '' && $request->financial_year != '') {
 
             $mainHeads = TaxType::where('upangsho_id', $request->upangsho)
@@ -1032,13 +1113,20 @@ class ReportController extends Controller
                 ->get();
 
             $headText = ['প্রাপ্তির বিস্তারিত বিবরন', 'বাজেট প্রাক্কলন অনুসারে বরাদ্দ', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', '১ম ত্রৈমাসিক এর মোট', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর', '২য় ত্রৈমাসিক এর মোট', 'অর্ধ বছরের মোট', 'জানুয়ারী', 'ফেব্রুয়ারী', 'মার্চ', '৩য় ত্রৈমাসিক এর মোট', '৩ টি ত্রৈমাসিক এর মোট', 'এপ্রিল', 'মে', 'জুন', '৪র্থ ত্রৈমাসিক এর মোট', 'বছরের মোট'];
-            $monthHeadNumber = ['',	'',	'',	'',	'',	'৩ + ৪ + ৫','',	'',	'',  '৭ + ৮ + ৯','৬ + ১০',	'',	'',	'',	'১২ + ১৩ + ১৪',	'১১ + ১৫',	'',	'',	'',	'১৭ + ১৮ +১৯',	'১৬ + ২০'];
-            $monthHeadText = [ ['07'],	['08'],	['09'],	['07','08','09'], ['10'],	['11'],	['12'],	['10', '11', '12'],	['07', '08', '09', '10', '11', '12'],['01'],['02'],	['03'],	['01', '02', '03'],	['07', '08', '09','10', '11', '12', '01', '02', '03'],	['04'],	['05'],	['06'],	['04', '05', '06'],	['07', '08', '09','10', '11', '12', '01', '02', '03', '04', '05', '06']];
-            $banlgaLetter = ['ক', 'খ','গ','ঘ','ঙ','চ','ছ','জ','ঝ', 'ঞ','ট','ঠ', 'ড', 'ঢ','ণ','ত','থ','ধ', 'ন','প', 'ফ', 'ব', 'ভ', 'ম','য', 'র', 'ল','শ', 'ষ', 'স','হ', 'ড়','ঢ়','য়'];
+            $monthHeadNumber = ['',    '',    '',    '',    '',    '৩ + ৪ + ৫', '',    '',    '',  '৭ + ৮ + ৯', '৬ + ১০',    '',    '',    '',    '১২ + ১৩ + ১৪',    '১১ + ১৫',    '',    '',    '',    '১৭ + ১৮ +১৯',    '১৬ + ২০'];
+            $monthHeadText = [['07'],    ['08'],    ['09'],    ['07', '08', '09'], ['10'],    ['11'],    ['12'],    ['10', '11', '12'],    ['07', '08', '09', '10', '11', '12'], ['01'], ['02'],    ['03'],    ['01', '02', '03'],    ['07', '08', '09', '10', '11', '12', '01', '02', '03'],    ['04'],    ['05'],    ['06'],    ['04', '05', '06'],    ['07', '08', '09', '10', '11', '12', '01', '02', '03', '04', '05', '06']];
+            $banlgaLetter = ['ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ', 'ছ', 'জ', 'ঝ', 'ঞ', 'ট', 'ঠ', 'ড', 'ঢ', 'ণ', 'ত', 'থ', 'ধ', 'ন', 'প', 'ফ', 'ব', 'ভ', 'ম', 'য', 'র', 'ল', 'শ', 'ষ', 'স', 'হ', 'ড়', 'ঢ়', 'য়'];
 
             $year = $request->financial_year;
         }
-        return view('accounts.report.abstract_register_quarterly',compact('mainHeads',
-        'headText','monthHeadNumber','monthHeadText','banlgaLetter','sections','year'));
-   }
+        return view('accounts.report.abstract_register_quarterly', compact(
+            'mainHeads',
+            'headText',
+            'monthHeadNumber',
+            'monthHeadText',
+            'banlgaLetter',
+            'sections',
+            'year'
+        ));
+    }
 }

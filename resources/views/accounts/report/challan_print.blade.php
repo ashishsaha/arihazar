@@ -214,8 +214,8 @@
                                     <td class="text-center">
                                         চেক নং-{{ enNumberToBn($vat->check_no) }}<br>
                                         তাং- {{ enNumberToBn(\Carbon\Carbon::parse($vat->date)->format('d/m/Y')) }}<br>
-                                        সোনালি ব্যাংক লিঃ, <br>
-                                        আড়াইহাজার শাখা, <br>
+                                        {{ $vat->bank->bank_name }}, <br>
+                                        {{ $vat->branch->branch_name }}, <br>
                                         আড়াইহাজার।
                                     </td>
                                     <td style="vertical-align: baseline;" class="text-center">
@@ -353,8 +353,8 @@
                                     <td class="text-center">
                                         চেক নং-{{ enNumberToBn($tax->check_no) }}<br>
                                         তাং- {{ enNumberToBn(\Carbon\Carbon::parse($tax->date)->format('d/m/Y')) }}<br>
-                                        সোনালি ব্যাংক লিঃ, <br>
-                                        আড়াইহাজার শাখা, <br>
+                                        {{ $tax->bank->bank_name }}, <br>
+                                        {{ $tax->branch->branch_name }}, <br>
                                         আড়াইহাজার।
                                     </td>
                                     <td style="vertical-align: baseline;" class="text-center">
